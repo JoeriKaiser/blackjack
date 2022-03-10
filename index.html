@@ -4,8 +4,25 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h1>Welcome to Blackjack</h1>
+    <main class="container">
+      <div class="player-1">
+        <h2>Joueur 1</h2>
+        <p>Le total des cartes du joueur 1 sont : <p id="cartes-1"></p></p>
+      </div>
+      <div class="player-2">
+        <h2>Joueur 2</h2>
+        <p>Le total des cartes du joueur 2 sont : <p id="cartes-2"></p></p>
+      </div>
+    </main>
+    <div class="button-container">
+    <button class="hit" onclick="hit()">Hit</button>
+    <img src="src/pngegg.png" alt="Card Game">
+    </div>
+  </body>
   <script src="script.js"></script>
 </html>

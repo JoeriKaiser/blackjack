@@ -1,83 +1,73 @@
 const confirmation = confirm("Voulez-vous commencer à jouer?");
-let sum1 = 0;
-let sum2 = 0;
-
 let cartes1 = [getRandom(), getRandom()];
 let cartes2 = [getRandom(), getRandom()];
-
-
-function getRandom() {
-  return Math.floor(Math.random(1, 10) *10 + 1);
-}
-for (let i = 0; i < cartes1.length; i++) {
-  sum1 += cartes1[i];
-}
-for (let i = 0; i < cartes2.length; i++) {
-  sum2 += cartes2[i];
-}
-
 if (confirmation) {
   console.log("Cartes du joueur numéro 1 : ", cartes1[0], "et", cartes1[1]);
   console.log("Cartes du joueur numéro 2 : ", cartes2[0], "et une carte cachée");
-  const resultTour1 = confirm(`Joueur 1 le total de vos cartes est de ${sum1} Voulez vous piocher une autre carte?`);
-  if (resultTour1) {
-    while (sum1 < 21 && resultTour1) {
-      cartes1.push(getRandom())
-        if (condition) {
-          
-        }
-    } 
-  } else {
-    window.location.reload();
-  }
-  // ALERT Je suis sortie de la boucle
-
-
-    // const resultTour1 = confirm(`Joueur 1 le total de vos cartes est de ${sum1} Voulez vous piocher une autre carte?`);
-    //   if (resultTour1) {
-    //     cartes1.push(getRandom());
-    //     if (sum1 === 21) {
-    //       alert("Blackjack");
-    //     } else if (sum1 < 21) {
-    //       console.log(sum1);
-    //       const resultTour2 = confirm(`Joueur 1 le total de vos cartes est de ${sum1} Voulez vous piocher une autre carte?`);
-    //     } else {
-    //       alert("Vous avez perdu")
-    //     }
-    //     window.location.reload();
-    //   } else {
-    //     console.log(`Votre score final est de ${sum1}`);
-    //     console.log(`Le score de votre adversaire est de ${sum2} `)
-    //     if (sum1 === sum2) {
-    //       alert("Vous êtes à égalité")
-    //     } else if (sum1 > sum2) {
-    //       alert("Vous avez gagné")
-    //     } else {
-    //       alert("Vous avez perdu!")
-    //     }
-    //     window.location.reload();
-    //   }
-      // if (sum1 < 21) {
-      //   const resultTour2 = confirm(`Joueur 1 le total de vos cartes est de ${sum1} Voulez vous piocher une autre carte?`);
-      //   if (resultTour2) {
-      //     cartes1.push(getRandom());
-      //     console.log(sum1)
-      //   }
-      // } else {
-      //   console.log(`Votre score final est de ${sum1}`);
-      //   console.log(`Le score de votre adversaire est de ${sum2} `)
-      //   if (sum1 === sum2) {
-      //     alert("Vous êtes à égalité")
-      //   } else if (sum1 > sum2) {
-      //     alert("Vous avez gagné")
-      //   } else {
-      //     alert("Vous avez perdu!")
-      //   }
-      //   window.location.reload();
-      //   // Votre score final est de ... vous avez gagner ou perdu
-      // }
-      //   console.log(cartes1)
-
 } else {
-  console.log("Dommage !");
+  alert("Dommage !");
+}
+const totalCartes1 = document.querySelector("#cartes-1");
+const totalCartes2 = document.querySelector("#cartes-2");
+totalCartes1.innerHTML = `${getValue(cartes1)}`;
+totalCartes2.innerHTML = `${cartes2[0]}, et une carte cachée`;
+function getRandom() {
+  return Math.floor(Math.random(1, 10) *10 + 1);
+}
+function getValue(hand) {
+  let sum = 0;
+  for (let i = 0; i < hand.length; i++) {
+    sum = sum + hand[i];
+  }
+  return sum
+}
+function hit() {
+  if (getValue(cartes1) < 21) {
+    cartes1.push(getRandom());
+    console.log(getValue(cartes1));
+    totalCartes1.innerHTML = `${getValue(cartes1)}`;
+  } else {
+    console.log("test")
+  }
+  while (getValue(cartes1) > 21) {
+    const response = confirm("Le joueur 1 à perdu voulez-vous rejouer?");
+    if (response === true) {
+      window.location.reload();
+    }
+    totalCartes1.innerHTML = `${getValue(cartes1)}`;
+  }
+  while (getValue(cartes1) === 21) {
+    const response = confirm("Le joueur 1 à fait un Blackjack, voulez-vous rejouer?");
+    if (response === true) {
+      window.location.reload();
+    }
+    totalCartes1.innerHTML = `${getValue(cartes1)}`;
+  }
+
+  while (getValue(cartes2) <= 16) {
+    cartes2.push(getRandom());
+    totalCartes2.innerHTML = `${getValue(cartes2)}`;
+  }
+  while (getValue(cartes2) > 17 && getValue(cartes2) < 21) {
+    console.log(`Le joueur 2 s'arrete à ${getValue(cartes2)}`);
+    totalCartes2.innerHTML = `${getValue(cartes2)}`;
+    break;
+  }
+
+  while (getValue(cartes2) > 21 ) {
+    const response = confirm("Le joueur 2 a perdu, voulez-vous rejouer?");
+    if (response === true) {
+      window.location.reload();
+    }
+    totalCartes2.innerHTML = `${getValue(cartes2)}`;
+    break;
+  }
+  while (getValue(cartes2) === 21 ) {
+    const response = confirm("Le joueur 2 à fait un Blackjack, voulez-vous rejouer?");
+    if (response === true) {
+      window.location.reload();
+    }
+    totalCartes2.innerHTML = `${getValue(cartes2)}`;
+    break;
+  }
 }
