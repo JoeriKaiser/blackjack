@@ -23,7 +23,7 @@ function getValue(hand) {
   for (let i = 0; i < hand.length; i++) {
     sum = sum + hand[i];
   }
-  return sum;totalCartes2.innerHTML = `${cartes2}, Pour un total de : ${getValue(cartes2)}`
+  return sum;
 };
 
 function startGame() {
