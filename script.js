@@ -14,6 +14,14 @@ function compareScores(score1, score2) {
   }
 }
 
+function restartGame() {
+  totalCartes1.innerHTML = `${cartes1}, Pour un total de : ${getValue(cartes1)}`
+  totalCartes2.innerHTML = `${cartes2[0]}, et une carte cachée`;
+  cartes1 = [getRandom(), getRandom()];
+  cartes2 = [getRandom(), getRandom()];
+  startGame();
+}
+
 function getRandom() {
   return Math.floor(Math.random(1, 10) *10 + 1);
 }

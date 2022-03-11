@@ -27,6 +27,7 @@ main {
   align-items: center;
 }
 button {
+  margin-top: 1rem;
   background-color: #83c5be;
   font-size: 2rem;
   padding: 1rem;
